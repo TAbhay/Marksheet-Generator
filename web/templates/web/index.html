@@ -1,0 +1,226 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proj 1</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="{% static 'web/js/script.js' %}"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .inner-container{
+             width: 90vw;
+             height: 95vh;
+             background-color: rgb(255, 255, 255);
+             margin:auto auto;
+             margin-top:10px;
+             box-shadow: 8px 8px 8px 5px rgba(255, 255, 255, 0.4);
+        }
+        .header{
+            width: 100%;
+        }
+        .header h1{
+            font-weight: bolder;
+            text-align: center;
+            background: rgb(255, 255, 255);
+            color: rgba(0,0,0,0.6);
+            text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+               0px -5px 16px rgba(255,255,255,0.3);
+        }
+        .upper-upload{
+            width: 80vw;
+            min-height: 20vh;
+              
+            margin: auto auto;
+            /* margin-top:10vh; */
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 1rem;
+        }
+        
+        button {
+		appearance: none;
+		outline: 0;
+		background-color: white;
+		border: 0;
+		padding: 10px 15px;
+		color: #19B5FE;
+		border-radius: 3px;
+		width: 250px;
+		cursor: pointer;
+		font-size: 20px;
+        font-weight: bolder;
+		transition-duration: 0.25s;
+		
+		
+	   }
+       button:hover{
+			background-color: rgb(245, 247, 249);
+		}
+
+
+
+
+        .footer{
+            margin-top:28vh;
+            margin-bottom: 0;
+        }
+        .popup{
+            display: flex;
+            align-items: center;
+            width:100% ;
+            flex-direction: column;
+            padding: 10px;
+            margin-top:1rem;
+        }
+        .input-score{
+             width: 100%;
+             height: 10vh;
+             padding: 1rem;
+             display: flex;
+             flex-direction: row;
+             justify-content: space-evenly;
+        }
+        .row mb-2{
+            width: 100%;
+        }
+        .button-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            height:30vh ;
+        }
+        .bttn-container{
+            appearance: none;
+            outline: 0;
+            background-color: white;
+            border: 0;
+            padding: 8px 12px;
+            color: #000000;
+            border-radius: 3px;
+            width: 250px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition-duration: 0.25s;
+            border: 1px solid grey;
+        }
+        .bttn-container:hover{
+                border: 1px solid black;
+                background-color:#2BAE66FF;
+                color:white
+        }
+        @media only screen and (max-width: 0px) {
+            .input-score{
+             width: 90%;
+             height: 10vh;
+             padding: .5rem;
+             display: flex;
+             flex-direction: row;
+             justify-content: space-evenly;
+        }
+        /* .positive{
+           width: 200px;
+        }
+        .negative{
+           width: 200px;
+        } */
+        button, input {
+    width: 200px;
+         }
+}
+   #upload-btn:hover{
+         background-color: #2BAE66FF;
+         color: white;
+         border: 1px solid white;
+   }
+    </style>
+   
+</head>
+<body class="bg-dark">
+    <div class="inner-container">
+            <div class="header">
+                <h1>Result Generator</h1>
+            </div>
+            <div class="popup" >
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="{{ message.tags}}" style="text-align: center; border:1px solid black; border-radius: 5px;padding: 5px;" >Files Uploaded</div>
+                    {% endfor %}
+                {% endif %}    
+            <div >
+                <div class="text-center darken-grey-text mb-4">
+                    <h1 class="font-bold mt-4 mb-3 h5">Upload</h1>
+                </div> 
+                   
+                   
+            <div class="upper-upload" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);">
+                
+    
+                <form action="{% url 'upload' %}" id="form" method="post" enctype="multipart/form-data"> 
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button id="upload-btn" class="btn btn-border-1">Upload</button>
+                </form>
+            </div>
+       
+            <div class="input-score">
+                 <label for="quantity"><b>+ve :</b></label>
+                 <input type="number" 
+                  id="positive" class="positive" name="positive" min="1"> 
+                  <label for="quantity"><b>-ve :</b></label>
+                  <input type="number" 
+                  id="negative" class="negative" name="negative" max="0"> 
+
+            </div>
+            <h1>{{changing}}</h1>
+            <div class="button-container">
+                <a id="bttn1" href="individual-marksheet?positive=5&negative=-1"><button class="bttn-container">Individual Marksheet</button></a>
+                <a id="bttn2" href="concise-marksheet?positive=5&negative=-1"><button class="bttn-container">Concise Marksheet</button></a>
+                <a id="bttn3" href="send-email"><button class="bttn-container">Send Email</button></a>
+            </div>
+        </div>
+       
+        <div class="footer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,96L30,101.3C60,107,120,117,180,144C240,171,300,213,360,224C420,235,480,213,540,202.7C600,192,660,192,720,197.3C780,203,840,213,900,202.7C960,192,1020,160,1080,154.7C1140,149,1200,171,1260,154.7C1320,139,1380,85,1410,58.7L1440,32L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg></div>
+        <script>
+            var element = document.getElementById("div_id_image");
+            var ele = document.getElementsByTagName("label")[0]
+            console.log(element)
+            console.log(ele)
+            ele.innerHTML="Upload files One by One"
+            positive= 5
+            negative = 0
+            document.getElementById("positive").addEventListener("change",e=>{
+                console.log("here")
+                console.log(e.target.value)
+                positive = e.target.value
+                url1 = "individual-marksheet?positive="+positive+"&negative="+negative
+                url2 = "concise-marksheet?positive="+positive+"&negative="+negative
+                var bttn1Element = document.getElementById('bttn1');
+                 bttn1Element.setAttribute('href',url1);
+                 var bttn2Element = document.getElementById('bttn2');
+                 bttn2Element.setAttribute('href',url2);
+            });
+            document.getElementById("negative").addEventListener("change",e=>{
+                 console.log("here")
+                 negative=e.target.value
+                 url1 = "individual-marksheet?positive="+positive+"&negative="+negative
+                 url2 = "concise-marksheet?positive="+positive+"&negative="+negative
+                 var bttn1Element = document.getElementById('bttn1');
+                 bttn1Element.setAttribute('href',url1);
+                 var bttn2Element = document.getElementById('bttn2');
+                 bttn2Element.setAttribute('href',url2);
+            });
+     
+         </script>
+</body>
+</html>

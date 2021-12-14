@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proj 1</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .inner-container{
+             width: 90vw;
+             min-height: 100vh;
+             background-color: rgb(255, 255, 255);
+             margin:auto auto;
+             margin-top:10px;
+        }
+        .header{
+            width: 100%;
+        }
+        .header h1{
+            font-weight: bolder;
+            text-align: center;
+            background: rgb(255, 255, 255);
+            color: rgba(0,0,0,0.6);
+            text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+               0px -5px 16px rgba(255,255,255,0.3);
+        }
+      .box{
+         margin-top: 10vh;
+         display:flex;
+         flex-direction:column;
+         min-height:30vh;
+         justify-content:space-between;
+          align-items:center;
+     }
+.success{
+  color:#fd1201;
+  font-size:2rem;
+  font-weight:bolder;
+}
+button {
+  border: none;
+  padding: 10px;
+  width:120px;
+  font-size: 1.4rem;
+  border-radius: 12px;
+  transition:
+    background-color 400ms ease,
+    color 400ms ease;
+  background-color: #0074D9;
+  color: #222222;
+}
+
+button:hover {
+  background-color: #0074D9;
+  color: #111111;
+}
+
+button.accept {
+  background-color: #0074D9;
+  margin-right: 24px;
+  border-radius:10px;
+}
+.accept a{
+  text-decoration:none;
+  color:white;
+  font-size:bolder;
+  font-size:1.4rem;
+}
+
+button.accept:hover {
+  background-color: #7FDBFF;
+}
+button.accept a:hover{
+  text-decoration:none;
+  color:white;
+  font-size:bolder;
+  font-size:1.4rem;
+}
+p{
+        margin-top:15px;
+}
+       
+    </style>
+</head>
+<body class="bg-dark">
+    <div class="inner-container">
+        <div >
+            <div class="header">
+                <h1>
+                 Result Generator</h1>
+            </div>
+            <div class="box">
+                 <div class="success">{{success}} </div> 
+                 
+                 <div><button class="accept"><a href="/">Home</a></button >
+                   <p>Go back to home</p>
+                 </div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+</html>
